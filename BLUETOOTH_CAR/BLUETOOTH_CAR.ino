@@ -1,6 +1,5 @@
 //Arduino Bluetooth Controlled Car//
-// Before uploading the code you have to install the necessary library//
-//AFMotor Library https://learn.adafruit.com/adafruit-motor-shield/library-install //
+//AFMotor Library: https://learn.adafruit.com/adafruit-motor-shield/library-install
 
 #include <AFMotor.h>
 
@@ -20,9 +19,8 @@ void setup()
 void loop(){
   if(Serial.available() > 0){ 
     command = Serial.read(); 
-    Stop(); //initialize with motors stoped
+    Stop(); //initialize with motors stopped
     //Change pin mode only if new command is different from previous.   
-    //Serial.println(command);
     switch(command){
     case 'F':  
       forward();
@@ -40,51 +38,47 @@ void loop(){
   } 
 }
 
-void forward()
+void go()
 {
   motor1.setSpeed(255); //Define maximum velocity
-  motor1.run(FORWARD); //rotate the motor clockwise
   motor2.setSpeed(255); //Define maximum velocity
-  motor2.run(FORWARD); //rotate the motor clockwise
   motor3.setSpeed(255);//Define maximum velocity
-  motor3.run(FORWARD); //rotate the motor clockwise
   motor4.setSpeed(255);//Define maximum velocity
+}
+
+void forward()
+{
+  go();
+  motor1.run(FORWARD); //rotate the motor clockwise
+  motor2.run(FORWARD); //rotate the motor clockwise
+  motor3.run(FORWARD); //rotate the motor clockwise
   motor4.run(FORWARD); //rotate the motor clockwise
 }
 
 void back()
 {
-  motor1.setSpeed(255); //Define maximum velocity
+  go();
   motor1.run(BACKWARD); //rotate the motor anti-clockwise
-  motor2.setSpeed(255); //Define maximum velocity
   motor2.run(BACKWARD); //rotate the motor anti-clockwise
-  motor3.setSpeed(255); //Define maximum velocity
   motor3.run(BACKWARD); //rotate the motor anti-clockwise
-  motor4.setSpeed(255); //Define maximum velocity
   motor4.run(BACKWARD); //rotate the motor anti-clockwise
 }
 
 void left()
 {
-  motor1.setSpeed(255); //Define maximum velocity
+  go();
   motor1.run(BACKWARD); //rotate the motor anti-clockwise
-  motor2.setSpeed(255); //Define maximum velocity
   motor2.run(BACKWARD); //rotate the motor anti-clockwise
-  motor3.setSpeed(255); //Define maximum velocity
   motor3.run(FORWARD);  //rotate the motor clockwise
-  motor4.setSpeed(255); //Define maximum velocity
   motor4.run(FORWARD);  //rotate the motor clockwise
 }
 
 void right()
 {
-  motor1.setSpeed(255); //Define maximum velocity
+  go();
   motor1.run(FORWARD); //rotate the motor clockwise
-  motor2.setSpeed(255); //Define maximum velocity
   motor2.run(FORWARD); //rotate the motor clockwise
-  motor3.setSpeed(255); //Define maximum velocity
   motor3.run(BACKWARD); //rotate the motor anti-clockwise
-  motor4.setSpeed(255); //Define maximum velocity
   motor4.run(BACKWARD); //rotate the motor anti-clockwise
 } 
 
